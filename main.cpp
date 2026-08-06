@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Copyright (C) 2026 Pragalathan M
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQuickWindow>
