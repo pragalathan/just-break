@@ -1,6 +1,9 @@
 build/
+build-release/
+dist/
 bin/
 .deps/
+qrc_resources.cpp
 *.user
 *.pro.user
 CMakeCache.txt

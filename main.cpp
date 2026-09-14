@@ -2,9 +2,11 @@
 // Copyright (C) 2026 Pragalathan M
 #include <QApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include <QQuickWindow>
 #include <QDir>
 #include <QCoreApplication>
+#include <QUrl>
 
 int main(int argc, char *argv[])
 {
@@ -18,16 +20,24 @@ int main(int argc, char *argv[])
     QQuickWindow::setDefaultAlphaBuffer(true);
 
     QQmlApplicationEngine engine;
-
-    const QString qmlPath = QDir(QCoreApplication::applicationDirPath())
-                                .filePath(QStringLiteral("Main.qml"));
+    const bool testMode = app.arguments().contains(QStringLiteral("--test"));
+    engine.rootContext()->setContextProperty(QStringLiteral("testMode"), testMode);
 
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreationFailed,
         &app, []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
 
+#ifdef JUSTBREAK_EMBEDDED_RESOURCES
+    // Production build: QML and icons embedded via resources.qrc
+    engine.load(QUrl(QStringLiteral("qrc:/JustBreak/Main.qml")));
+#else
+    // Dev build: load Main.qml from beside the binary
+    const QString qmlPath = QDir(QCoreApplication::applicationDirPath())
+                                .filePath(QStringLiteral("Main.qml"));
     engine.load(QUrl::fromLocalFile(qmlPath));
+#endif
+
     if (engine.rootObjects().isEmpty())
         return -1;
 

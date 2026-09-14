@@ -4,16 +4,14 @@ project(JustBreak VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Qml Quick)
 
-qt_add_executable(JustBreak
+add_executable(JustBreak
     main.cpp
+    resources.qrc
 )
-
-# Ship QML and tray icon next to the binary
-configure_file(${CMAKE_SOURCE_DIR}/Main.qml ${CMAKE_BINARY_DIR}/Main.qml COPYONLY)
-file(COPY ${CMAKE_SOURCE_DIR}/icons DESTINATION ${CMAKE_BINARY_DIR})
 
 target_link_libraries(JustBreak PRIVATE
     Qt6::Core
@@ -23,6 +21,9 @@ target_link_libraries(JustBreak PRIVATE
     Qt6::Quick
 )
 
+option(JUSTBREAK_EMBEDDED_RESOURCES "Embed QML and icons in the binary" ON)
+if(JUSTBREAK_EMBEDDED_RESOURCES)
+    target_compile_definitions(JustBreak PRIVATE JUSTBREAK_EMBEDDED_RESOURCES)
+endif()
+
 install(TARGETS JustBreak RUNTIME DESTINATION bin)
-install(FILES Main.qml DESTINATION bin)
-install(DIRECTORY icons DESTINATION bin)

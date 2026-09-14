@@ -1,0 +1,11 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/JustBreak">
+        <file>Main.qml</file>
+        <file alias="icons/tux_sleep.png">icons/tux_sleep.png</file>
+        <file alias="icons/tux_sleep_paused.png">icons/tux_sleep_paused.png</file>
+        <file alias="fonts/SmoochSans-Bold.ttf">fonts/SmoochSans-Bold.ttf</file>
+        <file alias="fonts/SmoochSans-SemiBold.ttf">fonts/SmoochSans-SemiBold.ttf</file>
+        <file alias="fonts/Abel-Regular.ttf">fonts/Abel-Regular.ttf</file>
+    </qresource>
+</RCC>
