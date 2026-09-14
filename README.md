@@ -14,6 +14,8 @@ It stays in the system tray and, every **14 minutes 30 seconds**, shows a framel
 - Paused tray icon (`tux_sleep_paused.png`) when scheduling is suspended
 - Uses KDE LayerShell so the overlay stays off the taskbar
 
+
+
 ## Requirements
 
 - Qt 6 (Core, Gui, Widgets, Qml, Quick)
@@ -28,7 +30,11 @@ sudo apt install g++ qt6-base-dev qt6-declarative-dev \
   qml6-module-qt-labs-platform qml6-module-org-kde-layershell
 ```
 
+
+
 ## Build & run
+
+
 
 ### Development (quick)
 
@@ -50,6 +56,8 @@ Show the countdown immediately (skip the first 14:30 wait):
 ```bash
 ./bin/JustBreak --test
 ```
+
+
 
 ### Production (standalone binary)
 
@@ -85,18 +93,24 @@ Only your app’s QML and PNG icons are baked into the binary.
 
 ## Tray menu
 
-| Action | Behavior |
-|--------|----------|
-| **Pause** | Suspends the next reminder. Enabled only when not already paused. |
+
+| Action     | Behavior                                                              |
+| ---------- | --------------------------------------------------------------------- |
+| **Pause**  | Suspends the next reminder. Enabled only when not already paused.     |
 | **Resume** | Schedules the next reminder 14:30 from now. Enabled only when paused. |
-| **Cancel** | Stops and hides the countdown if it is currently shown. |
+| **Cancel** | Stops and hides the countdown if it is currently shown.               |
+
+
+
 
 ## Timing
 
-| Setting | Value |
-|---------|-------|
-| Countdown | 30 seconds |
+
+| Setting                    | Value                 |
+| -------------------------- | --------------------- |
+| Countdown                  | 30 seconds            |
 | Interval between reminders | 14 minutes 30 seconds |
+
 
 Edit `countdownSeconds` and `repeatIntervalMs` in `Main.qml` to change these.
 
@@ -116,10 +130,18 @@ JustBreak/
 └── build-release/    # Production build (single binary)
 ```
 
+
+
+## Screenshot
+
+![JustBreak countdown overlay](screenshot.png)
+
 ## Notes
 
 - Designed for **KDE Plasma on Wayland**. LayerShell is what keeps the overlay out of the task manager.
 - The process stays running while the overlay is hidden (`QuitOnLastWindowClosed` is off). Quit by ending the process (or add a Quit tray item if you want one).
+
+
 
 ## License
 
